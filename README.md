@@ -14,15 +14,16 @@
  
  # Success
  ```base
- === GUN-VUE RELAY SERVER ===
- 
- Gun&Ollama Server running on http://localhost:3939
- AXE relay enabled!
- Internal URL: http://198.18.0.1:8765/
- External URL: https://198.18.0.1/
- Gun peer: http://198.18.0.1:8765/gun
- Storage: disabled
- Multicast on 233.255.255.255:8765
+=== GUN-VUE RELAY SERVER ===
+
+Gun&Ollama Server running on http://localhost:3939
+Ollama on LAN at http://192.168.1.9:3939
+AXE relay enabled!
+Internal URL: http://192.168.1.9:8765/
+External URL: https://192.168.1.9/
+Gun peer: http://192.168.1.9:8765/gun
+Storage: disabled
+Multicast on 233.255.255.255:8765
  ```
  
  # API
