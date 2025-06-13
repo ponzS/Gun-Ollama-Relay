@@ -1,19 +1,19 @@
 import express from "express";
 import cors from "cors";
 import { Ollama } from "ollama";
+import { networkInterfaces } from "os";
 
-// 初始化 Express 应用
 const app = express();
 const PORT = process.env.PORT || 3939;
 
-// 初始化 Ollama 客户端
+
 const ollama = new Ollama({ host: "http://localhost:11434" });
 
-// 中间件设置
-app.use(cors()); // 允许跨域请求
-app.use(express.json()); // 解析 JSON 请求体
 
-// 错误处理中间件
+app.use(cors()); 
+app.use(express.json()); 
+
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: "Internal Server Error" });
@@ -228,12 +228,27 @@ app.post("/api/embeddings", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// 获取局域网 IP 地址
+function getLocalIPAddress() {
+  const interfaces = networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      // 筛选 IPv4 地址，排除回环地址 (127.0.0.1)
+      if (iface.family === "IPv4" && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return "0.0.0.0"; 
+}
 
-// 导出初始化方法
+
 export default {
   init: () => {
     app.listen(PORT, () => {
+      const localIP = getLocalIPAddress();
       console.log(`Gun&Ollama Server running on http://localhost:${PORT}`);
+      console.log(`Ollama on LAN at http://${localIP}:${PORT}`);
     });
   },
 };
