@@ -100,10 +100,11 @@ pm2
 pm2 start start.js
 ```
 
-如果仓库指定了其他启动命令（例如 node index.js），请使用该命令。查看 package.json 或 README 获取详细信息。
+
+
 7. 验证部署
 
- # Success 终端输出以下内容代表运行成功
+ Success 终端输出以下内容代表运行成功
  ```base
 === GUN-VUE RELAY SERVER ===
 
