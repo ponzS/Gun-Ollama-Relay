@@ -1,14 +1,23 @@
-在懒猫微服上部署 Gun-Ollama-Relay 的指南 
+### 在懒猫微服上部署 Gun-Ollama-Relay 的指南 
+
 兼容任何使用gunDB构建的去中心化分布式数据库应用程序
+
 本指南提供在懒猫微服 Linux版本 系统上部署 Gun-Ollama-Relay 项目的详细步骤。该项目整合了 Gun.js 用于去中心化数据存储，以及 Ollama 用于本地运行语言模型。
+
 前提条件
 
 操作系统：Linux 发行版（例如 Ubuntu 20.04 或更高版本）。
+
 硬件要求：至少 4GB 内存、2 个 CPU 核心和 20GB 可用磁盘空间（大型语言模型可能需要更多）。
+
 软件要求：
+
 Node.js（v16 或更高版本）和 npm。
+
 Git 用于克隆仓库。
+
 Ollama 用于运行语言模型。
+
 带 bash 或兼容 shell 的终端。
 
 
@@ -16,49 +25,83 @@ Ollama 用于运行语言模型。
 部署步骤
 1. 安装系统依赖
 更新系统并安装必要工具。
+```base
 sudo apt update && sudo apt upgrade -y
+```
+```base
 sudo apt install -y curl git build-essential
+```
 
-2. 安装 Node.js 和 npm
+3. 安装 Node.js 和 npm
 使用 nvm 安装 Node.js 和 npm 以便灵活管理版本。
+```base
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
+```base
 source ~/.bashrc
+```
+```base
 nvm install 20
+```
+```base
 node --version
+```
+```base
 npm --version
+```
 
-3. 安装 Ollama
+
+
+5. 安装 Ollama
 Ollama 是运行本地语言模型的必要组件，使用官方脚本安装。
+```base
 curl -fsSL https://ollama.com/install.sh | sh
+```
 
 启动 Ollama 服务并验证其运行状态。
+```base
 systemctl enable ollama
+```
+```base
 systemctl start ollama
+```
+```base
 ollama --version
+```
 
 拉取一个语言模型（例如 Llama 3.3）以供 Ollama 使用。
+```base
 ollama pull llama3.3
+```
 
 4. 克隆 Gun-Ollama-Relay 仓库
 从 GitHub 克隆仓库。
+```base
 git clone https://github.com/ponzS/Gun-Ollama-Relay.git
+```
+```base
 cd Gun-Ollama-Relay
+```
 
-5. 安装项目依赖
+6. 安装项目依赖
 安装 package.json 中列出的 JavaScript 依赖。
+```base
 npm install
+```
 
-6. 运行应用
+8. 运行应用
 启动 Gun-Ollama-Relay 应用。
-npm start
+
+```base
+node start.js
+```
+pm2 
+```base
+pm2 start start.js
+```
 
 如果仓库指定了其他启动命令（例如 node index.js），请使用该命令。查看 package.json 或 README 获取详细信息。
 7. 验证部署
-
-Gun.js：确保 Gun.js 服务器运行正常，可通过浏览器或 curl 检查默认端口（例如 http://localhost:8765）。
-Ollama：通过向模型端点发送请求测试 Ollama API。
-
-curl http://localhost:11434/api/generate -d '{"model": "llama3.3", "prompt": "你好，世界！"}'
 
  # Success 终端输出以下内容代表运行成功
  ```base
@@ -83,6 +126,16 @@ GunDB数据库对等节点relay url 地址 ： http://192.168.1.9:8765/gun
 是否已经开启储存 ： Storage: disabled  
 
 如果需要储存在源代码中将store = process.env.RELAY_STORE || false,改为store = process.env.RELAY_STORE || true, 或者添加配置文件
+
+
+------在TalkFlow中验证运行状态------
+将数据库对等节点地址添加到relay页面中，绿色代表已建立链接
+
+为AI创建一个身份，将ollama API地址添加到AI页面中，启用AI自动回复，在回复对象中勾选自己的身份，尝试使用自己的身份发送一条消息与AI建立沟通。
+
+AI需要一个独立的客户端和身份运行，确保所有消息都是加密的，同时方便导出聊天记录用于您对私人AI模型的训练和其他用途。
+
+您可以将懒猫中的TalkFlow直接作为AI的身份，然后通过iOS版本或者桌面版本与它进行沟通。或者多开应用。
 
 8. （可选）设置为系统服务
 为确保应用持续运行，创建 systemd 服务。
@@ -138,3 +191,4 @@ Gun.js 连接问题：检查防火墙设置，确保端口 8765（或配置的�
 
 如需进一步帮助，请查看仓库的问题页面：https://github.com/ponzS/Gun-Ollama-Relay/issues
 
+感谢您的体验，我们将长期维护懒猫微服的TalkFlow版本。请随时提交改进建议
