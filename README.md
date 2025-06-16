@@ -77,3 +77,6 @@ Multicast on 233.255.255.255:8765
  ```base
  http://localhost:3939/api/embeddings
  ```
+
+
+learn more about gun-vue/relay : https://github.com/DeFUCC/gun-vue
