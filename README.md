@@ -25,7 +25,8 @@ Gun peer: http://192.168.1.9:8765/gun
 Storage: disabled
 Multicast on 233.255.255.255:8765
  ```
-#Just 8765
+# GUN&Ollama Only 8765
+
 from https://github.com/ponzS/Gun-Ollama
  
  # API
