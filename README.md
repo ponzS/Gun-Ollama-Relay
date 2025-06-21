@@ -16,6 +16,12 @@ sudo curl -fsSL --http1.1 https://ollama.com/install.sh | sh
  ```base
  node start.js
  ```
+
+if pm2
+```base
+pm2 start start.js
+```
+
  
  # Success
  ```base
