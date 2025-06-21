@@ -4,6 +4,11 @@
 
  
  Quick Start
+
+```base
+sudo curl -fsSL --http1.1 https://ollama.com/install.sh | sh
+```
+ 
  ```base
  pnpm install
  ```
