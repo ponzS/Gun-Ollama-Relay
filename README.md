@@ -5,7 +5,7 @@
 
 # Skins 
 
-https://github.com/DeFUCC/gun-vue/tree/main/relay
+https://github.com/DeFUCC/gun-vue/tree/main/relay/skin
  
  Quick Start
 
